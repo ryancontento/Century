@@ -92,14 +92,81 @@
               <div class="col-lg-8">
                   <pre class="line-numbers">
                       <code class="language-javascript">
-                          console.log("hello");
+                        // get values from interface
+                        function getValues() {
+                          // get values from page
+                          let startValue = document.getElementById("startValue").value;
+                          let endValue = document.getElementById("endValue").value;
+                        
+                          // parse into integers
+                          startValue = parseInt(startValue);
+                          endValue = parseInt(endValue);
+                        
+                          if (Number.isInteger(startValue) && Number.isInteger(endValue)) {
+                            // call generateNumbers
+                            numbers = generateNumbers(startValue, endValue);
+                            // call displayNumbers
+                            displayNumbers(numbers);
+                          } else {
+                            alert("you must enter integers");
+                          }
+                        }
+                        
+                        // generate numbers from startValue to endValue and
+                        function generateNumbers(sValue, eValue) {
+                          let numbers = [];
+                        
+                          for (let i = sValue; i <= eValue; i++) {
+                            numbers.push(i);
+                          }
+                        
+                          return numbers;
+                        }
+                        // display numbers and mark the even numbers bold
+                        function displayNumbers(numbers) {
+                          let templateRows = "";
+                          for (let i = 0; i < numbers.length; i++) {
+                            let className = "even";
+                            let number = numbers[i];
+                        
+                            if (number % 2 === 0) {
+                              className = "even";
+                            } else {
+                              className = "odd";
+                            }
+                            // this template literal does not display correctly with Prism, see github for correct line.
+                            templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+                          }
+                        
+                          document.getElementById("results").innerHTML = templateRows;
+                        }
+                        
                       </code>
                   </pre>
               </div>
               <div class="col-lg-4">
-                  <p>hello</p>
-                  <h5>Place Holder Js</h5>
-                  <p>simple console log place holder.</p>
+                  <p>
+                    The code is structured in three functions.
+                  </p>
+                  <h5>Function one: getValues</h5>
+                  <p>
+                    The main purpose of this function is to get the input values from the form on the view of the app.
+                    It creates two variables from the number input. The function then parses the input to integers, confirms
+                    they are integers, then sets them to the variable numbers.
+                  </p>
+                  <h5>Function two: generateNumbers</h5>
+                  <p>
+                    The generateNumbers function is a simple for loop that will generate the numbers from the input.
+                    Once the numbers are generated they are returned.
+                  </p>
+                  <h5>Function three: displayNumbers</h5>
+                  <p>
+                    This functions primary purpose is to display the list of numbers to the page, bolding the even numbers.
+                    To print the list of numbers, it loops through each number, assigning it to the number variable, and prints
+                    to the page using the template literal syntax. This function also contains an if else block to check if the 
+                    number is even or odd, and will also assign the class to each number via a literal, altering how the CSS will 
+                    style that number.
+                  </p>
               </div>
           </div>
       </div>
